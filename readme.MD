@@ -5,10 +5,12 @@ A modular Python Library for interacting with the (Jusibe SMS HTTP API) <http://
 ________
 
 ```python
-public_key = 'python_public_key_here'
-access_token = 'access_token__here'
+public_key = 'python_public_key_here' #change this
+access_token = 'access_token__here' #change this
 jusibe = Jusibe(public_key, access_token)
-response = jusibe.send_message(234812345678, "sender", "message to send")
+response = jusibe.send_message('234812345678', 'sender, 'message to send')
+jusibe.check_available_credit()
+
 
 ```
 

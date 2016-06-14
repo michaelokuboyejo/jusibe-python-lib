@@ -10,3 +10,5 @@ ACCESS_TOKEN = "access_token"
 jusibe = Jusibe(MY_PUBLIC_KEY,MY_ACCESS_TOKEN)
 
 print jusibe.check_available_credit()
+
+print jusibe.send_message('08121579761', 'X-MEN', 'Hello World')

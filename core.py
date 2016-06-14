@@ -1,6 +1,8 @@
 __author__ = 'michaelokuboyejo'
 
 import requests
+
+
 class Jusibe:
 
     BASE_URL = 'http://jusibe.com/smsapi'
@@ -22,31 +24,37 @@ class Jusibe:
     def check_available_credit(self):
         """
         Checks Available Credit Units
-        :return:
+        :return: available credits as a string
         """
         url = self.BASE_URL + "/get_credits"
-        r = requests.get(url)
-        return r.json()
-        #return self.perform_get_request(url)
+        response = self.perform_get_request(url)
+        return response['sms_credits']
 
     def check_delivery_status(self, message_id):
         """
         Checks Delivery Status of a particular Message
         :param message_id: message_id of the message in particular
-        :return:
+        :return: Delivery Status from Sever response as a dictionary
         """
-        url = self.BASE_URL + "/delivery_status"
+        payload = {'message_id': message_id}
+        url = "/delivery_status/"
         if len(message_id) == 0:
             raise JusibeException("message_id cannot be empty")
-        return self.perform_get_request(self,url, message_id)
+        response = self.perform_get_request(url, payload)
+        return {
+            'message_id': response['message_id'],
+            'status': response['status'],
+            'date_sent': response['date_sent'],
+            'date_delivered': response['date_delivered']
+        }
 
-    def send_message(self, recipient, message, sender):
+    def send_message(self, recipient, sender, message):
         """
         Accepts the message details and sends sms
         :param recipient: mssidn for receiver
         :param sender: string name of sender
         :param message: message to be sent
-        :return: response
+        :return: response in JSON
         """
         if recipient is None:
             raise JusibeException("Recipient field cannot be null or empty")
@@ -59,9 +67,14 @@ class Jusibe:
             'from': sender,
             'message': message
         }
-        return self.perform_post_request("/send_sms", payload)
+        response =  self.perform_post_request("/send_sms", payload)
+        return {
+            'status': response['status'],
+            'message_id': response['message_id'],
+            'sms_credits_used': response['sms_credits_used']
+        }
 
-    def perform_post_request(self, url, data={}):
+    def perform_post_request(self, url, payload={}):
         """
         Performs a POST request
         :param url:
@@ -69,21 +82,23 @@ class Jusibe:
         :return: HTTP response
         """
         uri = self.BASE_URL + url
+        keys = (self.public_key, self.access_token)
         try:
-            r = requests.post(uri,data)
+            r = requests.post(uri, params=payload, auth=keys)
             return r.json()
         except requests.ConnectionError:
             raise JusibeException("Bad Connection")
 
-    def perform_get_request(self, url, data):
+    def perform_get_request(self, url, params={}):
         """
         Performs a GET request
         :param url: URL to get
         :return:
         """
         uri = self.BASE_URL + url
+        keys = (self.public_key, self.access_token)
         try:
-            r = requests.get(uri, data)
+            r = requests.get(uri, params, auth=keys)
             return r.json()
         except requests.ConnectionError:
             raise JusibeException("Bad Connection")

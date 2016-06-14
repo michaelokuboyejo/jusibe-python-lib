@@ -1,5 +1,0 @@
-Good day Boss,
-
-How is work? I am Michael Okuboyejo. I'm a Software Developer. I think the Jusibe platform is amazing. I decided to write a Python Library for it. I hosted it here : <Github Link>. Please tell me what you think about it. Thank You.
-
-Have a great Day!
