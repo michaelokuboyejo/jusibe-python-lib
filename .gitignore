@@ -1,2 +1,5 @@
 .idea/
 env/
+*.pyc
+.pypirc
+keys.txt
