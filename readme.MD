@@ -9,8 +9,7 @@ Unofficial Python Library for the (Jusibe SMS HTTP API) <https://jusibe.com>
 Quick Start
 -------------
 
-The first thing you'll need to do is `sign up on Jusibe and get your 
-<https://jusibe.com>`.
+The first thing you'll need to do is `sign up on Jusibe <https://jusibe.com>` and get your account credentials.
 
 Installation
 ------------

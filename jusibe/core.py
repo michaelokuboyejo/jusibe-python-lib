@@ -1,13 +1,9 @@
-from jusibe.exceptions import BadRequestError, ConnectionError, ServiceError
+from jusibe.exceptions import BadRequestException, ConnectionException, InvalidCredentialsException
 from jusibe.settings import BASE_URL
-
-__author__ = 'michaelokuboyejo'
-
 import requests
 
 
 class Jusibe:
-
     def __init__(self, public_key, access_token):
         """
         Constructor for Jusibe Class
@@ -16,9 +12,9 @@ class Jusibe:
         :return:
         """
         if len(public_key) == 0 or public_key is None:
-            raise BadRequestError("The Public Key cannot be Empty. Please pass it to the constructor")
+            raise BadRequestException("The Public Key cannot be Empty. Please pass it in the constructor")
         if len(access_token) == 0 or access_token is None:
-            raise BadRequestError("The Access Token cannot be Empty. Please pass it to the constructor")
+            raise BadRequestException("The Access Token cannot be Empty. Please pass it in the constructor")
         self.public_key = public_key
         self.access_token = access_token
 
@@ -37,11 +33,11 @@ class Jusibe:
         :param message_id: message_id of the message in particular
         :return: Delivery Status from Sever response as a dictionary
         """
-        payload = {'message_id': message_id}
+        params = {'message_id': message_id}
         url = "/delivery_status/"
         if len(message_id) == 0:
-            raise BadRequestError("message_id cannot be empty")
-        response = self.perform_get_request(url, payload)
+            raise BadRequestException("message_id cannot be empty")
+        response = self.perform_get_request(url, params)
         return {
             'message_id': response['message_id'],
             'status': response['status'],
@@ -58,11 +54,11 @@ class Jusibe:
         :return: response in JSON
         """
         if recipient is None:
-            raise BadRequestError("Recipient field cannot be null or empty")
+            raise BadRequestException("Recipient field cannot be null or empty")
         if sender is None:
-            raise BadRequestError("Sender Field cannot be null or empty")
+            raise BadRequestException("Sender Field cannot be null or empty")
         if message is None:
-            raise BadRequestError("Message Field cannot be empty or null")
+            raise BadRequestException("Message Field cannot be empty or null")
         payload = {
             'to': recipient,
             'from': sender,
@@ -75,36 +71,41 @@ class Jusibe:
             'sms_credits_used': response['sms_credits_used']
         }
 
-    def perform_post_request(self, url, payload={}):
+    def perform_post_request(self, url, payload):
         """
         Performs a POST request
         :param url: URL to perform POST request
-        :param data: dictionary containing request parameters
+        :param payload: dictionary containing request parameters
         :return: HTTP response
         """
         uri = BASE_URL + url
         keys = (self.public_key, self.access_token)
         try:
             r = requests.post(uri, params=payload, auth=keys)
-        except requests.RequestException:
-            raise ConnectionError("The request failed because it wasn't able to reach the Jusibe Service. This is most likely due to a networking error of some sort")
-        if r.status_code != 200:
-            raise ConnectionError("Your request received an invalid status from Jusibe " + str(r.status_code) + ". Something went wrong")
+        except:
+            raise ConnectionException(
+                "The request failed because it wasn't able to reach the Jusibe Service. "
+                "This is most likely due to a networking error of some sort")
+        if r.status_code == 401:
+            raise InvalidCredentialsException("The request failed because the credentials supplied are not valid")
         return r.json()
 
-    def perform_get_request(self, url, params={}):
+    def perform_get_request(self, url, params=None):
         """
         Performs a GET request
         :param url: URL to get
+        :param params: headers for request
         :return: JSON response
         """
         uri = BASE_URL + url
         keys = (self.public_key, self.access_token)
         try:
             r = requests.get(uri, params, auth=keys)
-        except requests.RequestException:
-            raise ServiceError("The request failed because it wasn't able to reach the Jusibe service. This is most likely due to a networking error of some sort")
-        if r.status_code != 200:
-            raise ServiceError("Your request received an invalid status from Jusibe " + str(r.status_code) + ". Something went wrong")
-        return r.json()
+        except:
+            raise ConnectionException(
+                "The request failed because it wasn't able to reach the Jusibe service. "
+                "This is most likely due to a networking error")
+        if r.status_code == 401:
+            raise InvalidCredentialsException("The request failed because the credentials supplied are not valid")
 
+        return r.json()

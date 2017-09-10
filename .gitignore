@@ -3,3 +3,4 @@ env/
 *.pyc
 .pypirc
 keys.txt
+another_one.py

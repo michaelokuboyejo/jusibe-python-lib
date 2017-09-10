@@ -1,5 +1,6 @@
 __author__ = 'michaelokuboyejo'
 
+
 class JusibeException(Exception):
     """
     There was an ambiguous exception that occurred while attempting to fetch
@@ -7,21 +8,31 @@ class JusibeException(Exception):
     """
     pass
 
-class ServiceError(JusibeException):
+
+class ServiceException(JusibeException):
     """
     The request failed because the Jusibe service is currently down or
     experiencing issues.
     """
     pass
 
-class ConnectionError(JusibeException):
+
+class ConnectionException(JusibeException):
     """
     The request failed because the Jusibe service is currently down or
     experiencing issues.
     """
     pass
 
-class BadRequestError(JusibeException):
+
+class BadRequestException(JusibeException):
+    """
+    The request could not be completed because one or all of the parameters
+     needed for the request is invalid or incorrect
+    """
+    pass
+
+class InvalidCredentialsException(JusibeException):
     """
     The request could not be completed because one or all of the parameters
      needed for the request is invalid or incorrect
