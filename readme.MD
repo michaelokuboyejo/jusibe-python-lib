@@ -1,6 +1,6 @@
 ###jusibe-python-lib
 
-[![Build Status](https://travis-ci.org/michaelokuboyejo/jusibe-python-lib.svg?branch=master)](https://travis-ci.org/michaelokuboyejo/jusibe-python-lib)
+[![Build Status](https://travis-ci.org/michaelokuboyejo/jusibe-python-lib.svg?branch=master)](https://travis-ci.org/michaelokuboyejo/jusibe-python-lib.svg?branch=master)
 
 Unofficial Python Library for the (Jusibe SMS HTTP API) <https://jusibe.com>
 
