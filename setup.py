@@ -4,7 +4,7 @@ setup(
     name='jusibe',
     packages=['jusibe'],
     version='0.1',
-    description='Python Library for the https://www.jusibe.com SMS HTTP API',
+    description='Python Library for the Jusibe ( https://www.jusibe.com ) SMS HTTP API',
     author='Michael Okuboyejo',
     author_email='mykelokuboyejo@gmail.com',
     url='https://github.com/michaelokuboyejo/jusibe-python-lib',
