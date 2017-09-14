@@ -29,7 +29,7 @@ ________
 
 Python 2:
 	
-	import Jusibe
+	from jusibe.core import Jusibe
 	
 	public_key = 'python_public_key_here' #change this
 	access_token = 'access_token__here' #change this
@@ -45,7 +45,7 @@ Python 2:
 	
 Python 3:
 	
-	import Jusibe
+	from jusibe.core import Jusibe
 	
 	public_key = 'python_public_key_here' #change this
 	access_token = 'access_token__here' #change this
