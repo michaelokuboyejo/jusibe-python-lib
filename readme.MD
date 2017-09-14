@@ -1,20 +1,20 @@
-###jusibe-python-lib
+# Jusibe-Python-Library
 
 [![Build Status](https://travis-ci.org/michaelokuboyejo/jusibe-python-lib.svg?branch=master)](https://travis-ci.org/michaelokuboyejo/jusibe-python-lib.svg?branch=master)
 
-Unofficial Python Library for the (Jusibe SMS HTTP API) <https://jusibe.com>
+Unofficial Python Library for the [Jusibe SMS HTTP API](https://jusibe.com)
 
 
 
 Quick Start
 -------------
 
-The first thing you'll need to do is `sign up on Jusibe <https://jusibe.com>` and get your account credentials.
+The first thing you'll need to do is sign up on [Jusibe](https://jusibe.com) and get your account credentials.
 
 Installation
 ------------
 
-`jusibe` is available on `PYPI <https://pypi.python.org/pypi/jusibe/>`.
+`jusibe` is available on [PYPI](https://pypi.python.org/pypi/jusibe/) <https://pypi.python.org/pypi/jusibe/>.
 Install with ``pip`` i.e.
 
 
@@ -24,7 +24,7 @@ Install with ``pip`` i.e.
 
 The library is currently tested against Python versions 2.6.9, 2.7.9
 
-#####Usage
+### Usage
 ________
 
 Python 2:
