@@ -22,7 +22,7 @@ Install with ``pip`` i.e.
     pip install jusibe
 
 
-The library is currently tested against Python versions 2.6.9, 2.7.9
+The library is currently tested against Python versions 2.6.9, 2.7.9, 3.5, 3.6
 
 ### Usage
 ________
