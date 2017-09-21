@@ -1,1 +1,1 @@
-__author__ = 'michaelokuboyejo'
+from jusibe.core import Jusibe
