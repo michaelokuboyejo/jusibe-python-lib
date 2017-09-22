@@ -8,7 +8,7 @@ setup(
     author='Michael Okuboyejo',
     author_email='mykelokuboyejo@gmail.com',
     url='https://github.com/michaelokuboyejo/jusibe-python-lib',
-    download_url='https://github.com/michaelokuboyejo/jusibe-python-lib/tarball/0.2',
+    download_url='https://github.com/michaelokuboyejo/jusibe-python-lib/tarball/0.3',
     keywords=['jusibe', 'jusibe-python', 'SMS'],
     classifiers=[],
 )

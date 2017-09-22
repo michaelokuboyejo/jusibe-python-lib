@@ -4,3 +4,5 @@ env/
 .pypirc
 keys.txt
 another_one.py
+MANIFEST
+dist
