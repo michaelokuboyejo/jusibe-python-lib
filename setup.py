@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
     name='jusibe',
     packages=['jusibe'],
-    version='0.1',
+    version='0.3',
     description='Python Library for the Jusibe ( https://www.jusibe.com ) SMS HTTP API',
     author='Michael Okuboyejo',
     author_email='mykelokuboyejo@gmail.com',
