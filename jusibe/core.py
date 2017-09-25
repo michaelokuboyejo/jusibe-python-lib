@@ -34,21 +34,24 @@ class Jusibe:
         :return: Delivery Status from Sever response as a dictionary
         """
         params = {'message_id': message_id}
-        url = "/delivery_status/"
+        path = "/delivery_status"
         if len(message_id) == 0:
             raise BadRequestException("message_id cannot be empty")
-        response = self.perform_get_request(url, params)
-        return {
+        response = self.perform_post_request(path, params)
+        delivery_status = {
+            'request_speed': response['request_speed'],
             'message_id': response['message_id'],
             'status': response['status'],
-            'date_sent': response['date_sent'],
-            'date_delivered': response['date_delivered']
+            'date_sent': response['date_sent']
         }
+        if response.get('date_delivered') is not None:
+            delivery_status['date_delivered'] = response['date_delivered']
+        return delivery_status
 
     def send_message(self, recipient, sender, message):
         """
         Accepts the message details and sends sms
-        :param recipient: mssidn for receiver
+        :param recipient: msisdn for receiver
         :param sender: string name of sender
         :param message: message to be sent
         :return: response in JSON
